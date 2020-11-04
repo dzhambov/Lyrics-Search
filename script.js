@@ -15,6 +15,7 @@ async function searchSongs(term) {
 
 // Show song and artist in DOM
 function showData(data) {
+  console.log(data);
   // let output = '';
 
   // data.data.forEach(song => {
@@ -63,10 +64,10 @@ async function getMoreSongs(url) {
 
 // Get lyrics for song
 async function getLyrics(artist, songTitle) {
-  const res = await fetch(`${apiUrl}/v1/${artist}/${songTitle}`);
+  const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
   const data = await res.json();
 
-  const lyrics = data.lyrics.replace(/(\r\n|\r\n)/g, '<br>');
+  const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
 
   result.innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
   <span>${lyrics}</span>`;
@@ -89,9 +90,9 @@ form.addEventListener('submit', e => {
 
 // Get lyrics button click
 result.addEventListener('click', e => {
-  const clickedEl = e.target;
+ const clickedEl = e.target;
 
-  if(clickedEl.tagName === " BUTTON") {
+  if(clickedEl.tagName === "BUTTON") {
     const artist = clickedEl.getAttribute('data-artist');
     const songTitle = clickedEl.getAttribute('data-songtitle');
 
